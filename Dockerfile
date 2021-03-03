@@ -12,4 +12,3 @@ COPY yarn.lock /app/yarn.lock
 RUN gem install bundler -v 2.1.4 && bundle install
 RUN yarn
 COPY . /app
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
