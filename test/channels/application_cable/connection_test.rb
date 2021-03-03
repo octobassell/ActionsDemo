@@ -8,8 +8,4 @@ class ApplicationCable::ConnectionTest < ActionCable::Connection::TestCase
   
   #   assert_equal connection.user_id, "42"
   # end
-
-  test "Fake test" do
-    assert_equal 0, "42"
-  end
 end
