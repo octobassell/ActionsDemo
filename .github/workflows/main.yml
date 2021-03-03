@@ -3,17 +3,22 @@ name: CI
 on: push
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  tests:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        ruby-version: ['2.5.8']
 
     steps:
-      - name: Checkout 🛎️
+      - name: Set up Ruby
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-
-      - name: Install 🔧
-        run: bundle
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          
 
       - name: Test 🚨
         run: bin/rails test
