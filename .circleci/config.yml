@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
   aws-ecr: circleci/aws-ecr@6.15.3
+  aws-ecs: circleci/aws-ecs@2.0.0
 
 jobs:
   build:
@@ -40,4 +41,10 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: "ghactions"
           tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          cluster-name: 'Demo'
+          container-image-name-updates: 'container=demo,tag=${CIRCLE_SHA1}'
+          family: 'demo'
+          requires:
+            - aws-ecr/build-and-push-image
 
