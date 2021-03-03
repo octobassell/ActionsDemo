@@ -10,11 +10,12 @@ jobs:
         ruby-version: ['2.5.8']
 
     steps:
-      - name: Set up Ruby
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - uses: ruby/setup-ruby@v1
+      - name: Install ruby gems
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
