@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.1.2
+  aws-ecr: circleci/aws-ecr@6.15.3
 
 jobs:
   build:
@@ -36,3 +37,7 @@ workflows:
       - test:
           requires:
             - build
+      - aws-ecr/build-and-push-image:
+          repo: "ghactions"
+          tag: "${CIRCLE_SHA1}"
+
