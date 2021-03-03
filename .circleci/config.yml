@@ -43,6 +43,7 @@ workflows:
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           cluster-name: 'Demo'
+          service-name: 'demo-service'
           container-image-name-updates: 'container=demo,tag=${CIRCLE_SHA1}'
           family: 'demo'
           requires:
